@@ -1,0 +1,21 @@
+version: '3'
+services:
+  backend:
+    build: ./backend
+    tty: true
+    volumes:
+      - ./backend:/go/src/work
+    ports:
+      - "0.0.0.0:8080:8080"
+    depends_on:
+      - "db"
+    command: |
+      ./wait-for-it.sh -t 30 db:3306 -- go run main.go
+  db:
+    build: ./db
+    ports:
+      - "3306:3306"
+    environment:
+      - 
+      - MYSQL_DATABASE=test_app
+    command: mysqld --character-set-server=utf8mb4
