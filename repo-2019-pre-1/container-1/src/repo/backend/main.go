@@ -1,6 +1,7 @@
 package main
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/gin-contrib/cors"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
@@ -9,6 +10,11 @@ func main() {
 	app := App{DB: db}
 	app.DBInit()
 	r:=gin.Default()
+
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"http://frontend:8080"}
+	r.Use(cors.New(config))
+
 	r.GET("/hc", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "stay alive",
@@ -28,7 +34,6 @@ func (app App) GetData(c *gin.Context) {
 	}
 	c.JSON(200, teams)
 }
-
 // DB
 type Team struct {
 	gorm.Model

@@ -5,6 +5,7 @@ RUN apk -U add bash
 RUN go get -u github.com/gin-gonic/gin
 RUN go get -u github.com/go-sql-driver/mysql
 RUN go get -u github.com/jinzhu/gorm
+RUN go get -u github.com/gin-contrib/cors
 
 ADD . /go/src/work
 WORKDIR /go/src/work
