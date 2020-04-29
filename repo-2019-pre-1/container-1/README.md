@@ -28,3 +28,8 @@ go run main.go
 vagrant $
 curl 0.0.0.0:8080/hc
 ```
+
+```
+host PC Access to:
+http://192.168.33.10:8080/
+```
