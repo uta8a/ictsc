@@ -38,7 +38,7 @@ type Team struct {
 }
 
 func DBMigrate(db *gorm.DB) *gorm.DB {
-	db.DropTable(&Team{})
+	db.DropTableIfExists(&Team{})
 	db.AutoMigrate(&Team{})
 	return db
 }
