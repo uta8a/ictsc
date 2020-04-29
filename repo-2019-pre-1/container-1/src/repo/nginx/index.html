@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>ScoreBoard</title>
+	</head>
+		<style>
+			.cell-root {
+				display: flex;
+				flex-direction: row;
+			}
+			.Rank {
+				flex: auto;
+			}
+			.Team {
+				flex: auto;
+			}
+			.Score{
+				flex: auto;
+			}
+			.Description {
+				flex: auto;
+			}
+			.title > * {
+				font-weight: bold;
+			}
+		</style>
+	<body>
+		<h1>ScoreBoard</h1>
+		<div id="root">
+			<div class="cell-root title">
+				<div class="Rank">Rank</div>
+				<div class="Team">Team</div>
+				<div class="Score">Score</div>
+				<div class="Description">Description</div>
+			</div>
+		</div>
+	<template id="cell">
+		<style>
+			.cell-root {
+				display: flex;
+				flex-direction: row;
+			}
+			.Rank {
+				flex: auto;
+			}
+			.Team {
+				flex: auto;
+			}
+			.Score{
+				flex: auto;
+			}
+			.Description {
+				flex: auto;
+			}
+		</style>
+		<div class="cell-root">
+			<div class="Rank"></div>
+			<div class="Team"></div>
+			<div class="Score"></div>
+			<div class="Description"></div>
+		</div>
+	</template>
+	<script type="text/javascript">
+		if (!('content' in document.createElement('template'))) {
+			console.log("Sorry, cannot use html template!")
+		}
+		const get = async (f, url) => {
+			await fetch(url)
+				.then(res => {
+					const resCopy = res.clone()
+					return res.json().catch(_ => response.text())
+				})
+				.then(data => {
+					f(data)
+				})
+		}
+		const f = x => {
+			let e = document.querySelector('#cell')
+			let c = document.importNode(e.content, true)
+			
+			c.querySelector('.Rank').innerText = x.ID
+			c.querySelector('.Team').innerText = x.Name
+			c.querySelector('.Score').innerText = x.Score
+			c.querySelector('.Description').innerText = x.Description
+
+			document.querySelector('#root').appendChild(c)
+		}
+		const m = data => {
+			data.map(f)
+		}
+		get(m, '/api/team')
+	</script>
+	</body>
+</html>

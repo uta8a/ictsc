@@ -1,33 +1,25 @@
 version: '3'
 services:
-  frontend:
-    build: ./frontend
-    volumes:
-      - ./frontend:/usr/src/app
-    command: |
-      http-server -a "0.0.0.0" -p 8000
-    ports:
-      # - "0.0.0.0:8000:8000"
-      - "8000:8000"
   backend:
     build: ./backend
     tty: true
     volumes:
       - ./backend:/go/src/work
-    ports:
-      # - "0.0.0.0:8080:8080"
-      - "8080:8080"
     depends_on:
       - "db"
     command: |
       ./wait-for-it.sh -t 30 db:3306 -- go run main.go
   db:
     build: ./db
-    ports:
-      - "3306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=rootpassword
       - MYSQL_USER=useradmin
       - MYSQL_PASSWORD=pass
       - MYSQL_DATABASE=test_app
     command: mysqld --character-set-server=utf8mb4
+  nginx:
+    build: ./nginx
+    depends_on:
+      - "backend"
+    ports:
+      - "8080:8080"

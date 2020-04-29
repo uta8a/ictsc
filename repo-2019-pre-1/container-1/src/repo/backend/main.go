@@ -12,10 +12,10 @@ func main() {
 	r:=gin.Default()
 
 	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"http://frontend:8080"}
+	config.AllowOrigins = []string{"http://localhost:8080"}
 	r.Use(cors.New(config))
 
-	r.GET("/hc", func(c *gin.Context) {
+	r.GET("/api/hc", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "stay alive",
 		})
