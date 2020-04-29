@@ -44,19 +44,18 @@ func DBMigrate(db *gorm.DB) *gorm.DB {
 }
 
 func (app App) DBInit() {
-	team1 := Team{Name: "usagi-san", Score: 4000, Description: "hop-jump"}
-	team2 := Team{Name: "yagi-san", Score: 3000, Description: "meee"}
-	team3 := Team{Name: "kame-san", Score: 2000, Description: "byu-nnn"}
-	team4 := Team{Name: "rakuda-san", Score: 1000, Description: "tokotoko"}
-	team5 := Team{Name: "ookami-san", Score: 0, Description: "gao-gao-"}
-
 	db := app.DB
-	db.NewRecord(&team1)
-	app.DB.Create(&team1)
-	app.DB.Create(&team2)
-	app.DB.Create(&team3)
-	app.DB.Create(&team4)
-	app.DB.Create(&team5)
+	teams := []Team{
+		Team{Name: "usagi-san", Score: 4000, Description: "hop-jump"},
+		Team{Name: "yagi-san", Score: 3000, Description: "meee"},
+		Team{Name: "kame-san", Score: 2000, Description: "byu-nnn"},
+		Team{Name: "rakuda-san", Score: 1000, Description: "tokotoko"},
+		Team{Name: "ookami-san", Score: 0, Description: "gao-gao-"},
+	}
+	for _,team := range teams {
+		db.NewRecord(team)
+		db.Create(&team)
+	}
 }
 
 func DBConnect() *gorm.DB {
