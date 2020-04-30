@@ -2,13 +2,8 @@ version: '3'
 services:
   backend:
     build: ./backend
-    tty: true
-    volumes:
-      - ./backend:/go/src/work
     depends_on:
       - "db"
-    command: |
-      ./wait-for-it.sh -t 30 db:3306 -- go run main.go
   db:
     build: ./db
     environment:
