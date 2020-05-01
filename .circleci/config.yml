@@ -16,10 +16,12 @@ jobs:
           name: change directory
           command: |
             cd ./repo-2019-pre-1/container-1/src/repo
+            echo $PWD
       - run:
           name: docker-compose up
           command: |
             set -x
+            echo $PWD
             docker-compose up --build -d
       - run:
           name: test
