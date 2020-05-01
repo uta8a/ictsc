@@ -32,7 +32,9 @@ workflows:
   test:
     jobs:
       - container-1:
-        filters:
-          tags:
-            only: /v.*/
+          branches:
             ignore: /.*/
+          filters:
+            tags:
+              only: /v.*/
+              ignore: /.*/
