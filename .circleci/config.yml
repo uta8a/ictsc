@@ -37,6 +37,6 @@ workflows:
               only:
                 - no
             branches:
-              only:
-                - test
+              ignore:
+                - /.*/
 
