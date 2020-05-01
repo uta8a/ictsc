@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  build:
+  build-container-1:
     machine:
       image: circleci/classic:edge
     working_directory: ~/repo/repo-2019-pre-1/container-1/src/repo
@@ -31,7 +31,9 @@ workflows:
   version: 2.1
   test:
     jobs:
-      - build:
+      - build-container-1:
         filters:
           tags:
             only: /v.*/
+          branches:
+            ignore: /.*/
