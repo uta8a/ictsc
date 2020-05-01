@@ -3,20 +3,16 @@ jobs:
   build:
     machine:
       image: circleci/classic:edge
-    working_directory: ~/repo
+    working_directory: ~/repo/repo-2019-pre-1/container-1/src/repo
     steps:
-      - checkout
+      - checkout:
+          path: ~/repo
       - run:
           name: Install Docker Compose
           command: |
             curl -L https://github.com/docker/compose/releases/download/1.25.5/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
             chmod +x ~/docker-compose
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
-      - run:
-          name: change directory
-          command: |
-            cd ./repo-2019-pre-1/container-1/src/repo
-            echo $PWD
       - run:
           name: docker-compose up
           command: |
