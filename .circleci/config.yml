@@ -29,7 +29,7 @@ jobs:
           command: docker-compose down
 workflows:
   version: 2.1
-  test:
+  chal-1:
     jobs:
       - container-1:
           filters:
