@@ -33,6 +33,9 @@ workflows:
     jobs:
       - container-1:
           filters:
+            tags:
+              only:
+                - no
             branches:
               only:
                 - test
