@@ -1,6 +1,10 @@
 version: 2.1
 jobs:
   container-1:
+    filters:
+      tags:
+        only: /v.*/
+        ignore: /.*/
     machine:
       image: circleci/classic:edge
     working_directory: ~/repo/repo-2019-pre-1/container-1/src/repo
@@ -31,8 +35,4 @@ workflows:
   version: 2.1
   chal-1:
     jobs:
-      - container-1:
-          filters:
-            tags:
-              only: /v.*/
-              ignore: /.*/
+      - container-1
