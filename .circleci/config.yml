@@ -27,3 +27,11 @@ jobs:
       - run:
           name: docker-compose down
           command: docker-compose down
+workflows:
+  version: 2
+  test:
+    jobs:
+      - build:
+        filters:
+          tags:
+            only: /v.*/
